@@ -10,7 +10,7 @@ const createTable = async (nameTable) => {
             table.string('text')
             table.string('date')
         });
-        console.log('Table created')
+        //console.log('Table created')
     } catch (error) {
         throw error;
     }

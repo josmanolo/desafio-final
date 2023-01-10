@@ -28,19 +28,12 @@ const Messages = new MessagesDao();
 const Users = new UsersDao();
 const app = express();
 
-const corsOptions = {
-    origin: 'http://localhost:5173',
-    optionSuccessStatus: 200,
-    method: ['GET', 'POST']
-}
-
 app.use(express.json());
 app.use(
     express.urlencoded({
         extended: true,
     })
 );
-app.use(cors(corsOptions));
 app.set("view engine", "hbs");
 app.set("views", "./views");
 app.use(express.static(__dirname + "/public"));
@@ -81,17 +74,17 @@ passport.use(
                 const user = await usersModel.findOne({ username: username });
 
                 if (user.length === 0) {
-                    console.log("User not found");
+                    //console.log("User not found");
                     return done(null, false, { message: "User not found" });
                 }
 
                 if (!isValidPassword(user.password, password)) {
-                    console.log("Wrong Password");
+                    //console.log("Wrong Password");
                     return done(null, false, { message: "Wrong Password" });
                 }
                 return done(null, user);
             } catch (error) {
-                console.log(error);
+                //console.log(error);
             }
         }
     )
@@ -110,10 +103,10 @@ passport.use(
                 const user = await usersModel.find({ username });
                 const { name, email, age, tel } = req.body;
 
-                console.log("User?--->", user)
+                //console.log("User?--->", user)
 
                 if (user.length > 0) {
-                    console.log("User already exist");
+                    //console.log("User already exist");
                     return done(null, false, { message: "User already exist" });
                 }
 
@@ -132,7 +125,7 @@ passport.use(
                 sendMail("user", newUser)
                 return done(null, username);
             } catch (error) {
-                console.log(error);
+                //console.log(error);
             }
         }
     )
@@ -175,19 +168,19 @@ const PORT = args.port || process.env.PORT;
 const clusterMode = args.mode === 'CLUSTER';
 
 if(cluster.isPrimary && clusterMode) {
-    console.log(`Master ${process.pid} is running`);
+    //console.log(`Master ${process.pid} is running`);
     for (let i = 0; i < numCPUs; i++) {
         cluster.fork();
     }
 
     cluster.on('exit', (worker, code, signal) => {
-        console.log(`Worker ${worker.process.pid} died`);
+        //console.log(`Worker ${worker.process.pid} died`);
     })
 } else {
     httpServer.listen(PORT, () => {
-        console.log(`Server running port ${PORT}`);
+        //console.log(`Server running port ${PORT}`);
     });
 
-    console.log(`Worker ${process.pid} started`);
+    //console.log(`Worker ${process.pid} started`);
 }
 

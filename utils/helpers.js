@@ -28,9 +28,9 @@ const connectDB = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
-        console.log("MongoDB Connected");
+        //console.log("MongoDB Connected");
     } catch (error) {
-        console.log(error);
+        //console.log(error);
     }
 };
 
@@ -73,7 +73,7 @@ const sendMail = async (type, info) => {
 
         await transporter.sendMail(mailOptions);
     } catch (error) {
-        console.log(error);
+        //console.log(error);
     }
 };
 
@@ -86,9 +86,10 @@ const sendSms = async (tel) => {
             from: ":+14155238886",
             to: `:+521${tel}`,
         });
-        console.log(message);
+        //console.log(message);
     } catch (error) {
-        console.log(error);
+        return error;
+        //console.log(error);
     }
 };
 
