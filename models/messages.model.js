@@ -1,19 +1,10 @@
-const mongoose = require('mongoose');
-
-const AuthorSchema = new mongoose.Schema({
-    name: {type: String},
-    lastName: {type: String},
-    age: {type: Number},
-    user: {type: String},
-    img: {type: String},
-})
+const mongoose = require("mongoose");
 
 const MessagesSchema = new mongoose.Schema({
-    author: {type: [AuthorSchema]},
-    txt: {
-        type: String,
-        required: true,
-    },
+    email: { type: String },
+    date: { type: String },
+    type: { type: String },
+    text: { type: String }
 });
 
-module.exports = mongoose.model('Messages', MessagesSchema)
+module.exports = mongoose.model("Messages", MessagesSchema);

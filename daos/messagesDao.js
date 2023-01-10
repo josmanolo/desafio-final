@@ -9,11 +9,16 @@ class MessagesDao{
     async getMessages() {
         try {
             const messages = await Messages.find().lean();
+            return messages;
+        } catch (error) {
+            return error
+        }
+    }
 
-            const msg = messages.map(mess => {
-                return {...mess, author: mess.author[0].name}
-            })
-            return msg;
+    async getMessagesByUser(email) {
+        try {
+            const messages = await Messages.find({email: email}).lean();
+            return messages;
         } catch (error) {
             return error
         }

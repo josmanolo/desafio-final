@@ -8,10 +8,10 @@ const authRouter = Router();
 authRouter.get("/login", (req, res) => {
     try {
         if (req.isAuthenticated()) {
-            console.log("User is already logged");
+            //console.log("User is already logged");
             res.render("index", { layout: "login" });
         } else {
-            console.log("User can login");
+            //console.log("User can login");
             res.render("index", { layout: "login" });
         }
     } catch (error) {
@@ -29,7 +29,7 @@ authRouter.post(
         failureRedirect: "/login-error",
     }),
     (req, res) => {
-        console.log("Login Post: ", res)
+        //console.log("Login Post: ", res)
     }
 );
 
@@ -58,7 +58,7 @@ authRouter.post("/signup", upload.single('avatar'),  passport.authenticate("sign
     successRedirect: "/login",
     failureRedirect: "/signup-error",
 }), (req, res) => {
-    console.log("yes");
+    //console.log("yes");
 })
 
 authRouter.get("/login-error", (req, res) => {

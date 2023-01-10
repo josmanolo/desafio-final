@@ -41,27 +41,22 @@
         <main>
 
             <h1>Centro de Mensajes</h1>
-            <input type="text" id="user" placeholder="Ingresa tu usuario" />
-            <input type="text" id="name" placeholder="Ingresa tu nombre" />
-            <input
-                type="text"
-                id="lastName"
-                placeholder="Ingresa tu apellido"
-            />
-            <input type="text" id="age" placeholder="Ingresa tu edad" />
-            <input type="text" id="img" placeholder="Ingresa tu imagen" />
-            <input type="text" id="text" placeholder="Ingresa tu mensaje" />
-            <button onclick="sendMessage()" class="btn-chat">Enviar</button>
-            <hr />
             <article id="chat">
                 {{#each list.messages}}
                     <p>
-                        <span>{{author}} - </span>
+                        <span>{{email}} - </span>
                         <span>{{date}}: </span>
-                        <span>{{txt}}</span>
+                        <span>{{text}}</span>
                     </p>
                 {{/each}}
             </article>
+            <hr />
+            <input type="hidden" id="email" value={{list.user.email}} />
+            <input type="hidden" id="type" value="user" />
+            <input type="text" id="text" placeholder="Ingresa tu mensaje" />
+            <button onclick="sendMessage()" class="btn-chat">Enviar</button>
+            
+            
 
         </main>
 

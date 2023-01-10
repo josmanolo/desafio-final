@@ -8,6 +8,7 @@ const appController = new AppController();
 
 appRouter.get("/products", checkAuth, appController.renderProducts);
 appRouter.get("/chat", checkAuth, appController.renderMessagges);
+appRouter.get("/chat/user", checkAuth, appController.renderUserMessages);
 appRouter.get("/server", appController.renderServerInfo);
 
 module.exports = appRouter;

@@ -10,11 +10,7 @@ class MessagesController {
     getMessages = async (req, res) => {
         const messages = await this.messagesDao.getMessages();
         const products = await productsModel.find().lean();
-
-        console.log("Messages----->", messages);
-        console.log("Products----->", products);
-        console.log(req.session.passport);
-
+        
         res.render("index", {
             layout: "app",
             list: {

@@ -42,6 +42,19 @@ class AppController {
             },
         });
     };
+
+    renderUserMessages = async (req, res) => {
+        const email = `${req.session.passport.user.email}/`;
+        const messages = await this.messagesDao.getMessagesByUser(email);
+
+        res.render("index", {
+            layout: "chat",
+            list: {
+                messages: messages,
+                user: req.session.passport.user,
+            },
+        });
+    };
 }
 
 module.exports = AppController;
