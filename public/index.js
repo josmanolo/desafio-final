@@ -1,32 +1,45 @@
+
+
 const server = io().connect();
+
+const getCurrentDate = () => {
+    const today = new Date();
+    const date =
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate();
+    const time =
+        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const dateTime = date + " " + time;
+
+    return dateTime;
+};
 
 const renderMsg = (msgs) => {
     const chat = document.querySelector("#chat");
-    const chatMessages = msgs.map(msg => {
-        console.log(msg.author[0])
+    //console.log(msgs)
+    const chatMessages = msgs.map((msg) => {
         return `<p>
-                    <span>${msg.author[0].user}</span>
-                    <span>${new Date()}</span>
+                    <span>${msg.email}</span>
+                    <span>${msg.date}</span>
                     <span>${msg.text}</span>
-                </p>`
+                </p>`;
     });
 
-    chat.innerHTML = chatMessages.join(' ');
-}
+    chat.innerHTML = chatMessages.join(" ");
+};
 
 const sendMessage = () => {
-    const user = document.querySelector("#user").value;
-    const name = document.querySelector("#name").value;
-    const lastName = document.querySelector("#lastName").value;
-    const age = document.querySelector("#age").value;
-    const img = document.querySelector("#img").value;
-    const txt = document.querySelector("#text").value;
+    const email = document.querySelector("#email").value;
+    const type = document.querySelector("#type").value;
+    const text = document.querySelector("#text").value;
 
-    const message = { author: { user, name, lastName, age, img }, txt };
-    server.emit('new-message', message);
-    console.log(message)
-} 
+    const message = { email, type, text, date: getCurrentDate() };
+    server.emit("new-message", message);
+};
 
-server.on('new-message-server', messages => {
+server.on("new-message-server", (messages) => {
     renderMsg(messages);
-})
+});
