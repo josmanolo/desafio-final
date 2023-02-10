@@ -9,5 +9,7 @@ productsRouter.get("/api/products", Products.getProducts);
 productsRouter.post("/api/products", Products.saveProduct);
 productsRouter.get("/api/products/category/:category", Products.getProductsByCategory);
 productsRouter.get("/api/products/id/:id", Products.getProductsById);
+productsRouter.delete("/api/products", Products.deleteProductById);
+productsRouter.put("/api/products", Products.updateProductById);
 
 module.exports = productsRouter;
